@@ -12,7 +12,7 @@ import java.util.List;
 public class ArticlesService {
     private final ArticleRepository articleRepository;
 
-    public List<Article> fetchUserArticles(String userId) {
+    public List<Article> fetchProcessedUserArticles(String userId) {
         List<Article> result = List.of();
         // Todo
         return result;

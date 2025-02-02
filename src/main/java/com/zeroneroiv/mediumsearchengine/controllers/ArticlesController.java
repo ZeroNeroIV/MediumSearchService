@@ -17,7 +17,7 @@ public class ArticlesController {
 
     @GetMapping("/{userId}")
     public ResponseEntity<Object> fetchArticles(@PathVariable String userId) {
-        List<Article> result = articlesService.fetchUserArticles(userId);
+        List<Article> result = articlesService.fetchProcessedUserArticles(userId);
         return ResponseEntity.ok(result);
     }
 }

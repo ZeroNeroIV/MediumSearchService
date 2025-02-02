@@ -4,14 +4,16 @@ import com.zeroneroiv.mediumsearchengine.repositories.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class StatusService {
     private final ArticleRepository articleRepository;
 
 
-    public String getUserArticlesStatus(String userId) {
+    public List<String> getUserArticlesStatus(String userId) {
         // Todo
-        return "";
+        return List.of();
     }
 }
