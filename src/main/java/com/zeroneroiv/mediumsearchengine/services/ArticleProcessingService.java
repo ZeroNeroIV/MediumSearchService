@@ -9,12 +9,10 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ArticlesService {
+public class ArticleProcessingService {
     private final ArticleRepository articleRepository;
 
-    public List<Article> fetchProcessedUserArticles(String userId) {
-        List<Article> result = List.of();
-        // Todo
-        return result;
+    public List<Article> fetchUserArticles(Long userId) {
+        return articleRepository.findAllReadyByAuthorId(userId);
     }
 }

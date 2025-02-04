@@ -15,7 +15,7 @@ public class StatusController {
     private final StatusService statusService;
 
     @GetMapping("/{userId}")
-    public ResponseEntity<Object> status(@PathVariable String userId) {
+    public ResponseEntity<List<String>> status(@PathVariable Long userId) {
         List<String> result = statusService.getUserArticlesStatus(userId);
         return ResponseEntity.ok(result);
     }

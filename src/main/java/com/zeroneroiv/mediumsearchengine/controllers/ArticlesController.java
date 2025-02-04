@@ -1,7 +1,7 @@
 package com.zeroneroiv.mediumsearchengine.controllers;
 
 import com.zeroneroiv.mediumsearchengine.models.Article;
-import com.zeroneroiv.mediumsearchengine.services.ArticlesService;
+import com.zeroneroiv.mediumsearchengine.services.ArticleProcessingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +13,11 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController("/articles")
 public class ArticlesController {
-    private final ArticlesService articlesService;
+    private final ArticleProcessingService articleProcessingService;
 
     @GetMapping("/{userId}")
-    public ResponseEntity<Object> fetchArticles(@PathVariable String userId) {
-        List<Article> result = articlesService.fetchProcessedUserArticles(userId);
+    public ResponseEntity<Object> fetchArticles(@PathVariable Long userId) {
+        List<Article> result = articleProcessingService.fetchUserArticles(userId);
         return ResponseEntity.ok(result);
     }
 }

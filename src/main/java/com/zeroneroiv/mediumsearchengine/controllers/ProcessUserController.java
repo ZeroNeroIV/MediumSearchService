@@ -13,7 +13,7 @@ public class ProcessUserController {
     private final ProcessUserService processUserService;
 
     @PostMapping("/{userId}")
-    public ResponseEntity<Object> processUser(@PathVariable String userId) {
+    public ResponseEntity<Object> processUser(@PathVariable Long userId) {
         processUserService.processUser(userId);
         return ResponseEntity.ok().build();
     }
