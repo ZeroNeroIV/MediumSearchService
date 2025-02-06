@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface ArticleRepository extends JpaRepository<Article, Long> {
+public interface DBArticleRepository extends JpaRepository<Article, Long> {
     @Query("SELECT x FROM Article x WHERE x.status == x.ProcessingStatus.COMPLETED and x.authorId == ?1")
     List<Article> findAllReadyByAuthorId(Long authorId);
 

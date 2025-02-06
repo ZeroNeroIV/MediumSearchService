@@ -16,6 +16,7 @@ public class Article {
     private String content;
     private String url;
     private Long authorId;
+    private String elasticSearchDocumentId;
     private ProcessingStatus status = ProcessingStatus.PENDING;
 
     public enum ProcessingStatus {

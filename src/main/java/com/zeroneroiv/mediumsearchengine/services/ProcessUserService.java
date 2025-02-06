@@ -1,7 +1,7 @@
 package com.zeroneroiv.mediumsearchengine.services;
 
 import com.zeroneroiv.mediumsearchengine.models.Article;
-import com.zeroneroiv.mediumsearchengine.repositories.ArticleRepository;
+import com.zeroneroiv.mediumsearchengine.repositories.DBArticleRepository;
 import com.zeroneroiv.mediumsearchengine.utilities.MediumApiUtility;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,11 +12,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProcessUserService {
     private final MediumApiUtility mediumApiUtility;
-    private final ArticleRepository articleRepository;
+    private final DBArticleRepository DBArticleRepository;
 
     public void processUser(Long userId) {
         List<Article> results = mediumApiUtility.fetchTopArticles(userId, 20);
-        articleRepository.saveAll(results);
+        DBArticleRepository.saveAll(results);
+        // TODO
+        // Pipeline
+    }
+    public void storeInES(List<Article> articleList) {
         // TODO
     }
+
 }
