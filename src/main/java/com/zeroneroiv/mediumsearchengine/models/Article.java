@@ -1,25 +1,16 @@
 package com.zeroneroiv.mediumsearchengine.models;
 
-import jakarta.persistence.*;
 import lombok.Data;
-
-import java.util.Set;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 @Data
-@Table
-@Entity
+@Document(indexName = "devto_article")
 public class Article {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String title;
-    private String content;
-    private String url;
-    private Long authorId;
-    private String elasticSearchDocumentId;
-    private ProcessingStatus status = ProcessingStatus.PENDING;
 
-    public enum ProcessingStatus {
-        PENDING, PROCESSING, COMPLETED, FAILED
-    }
+    private String url;
+
+    private int positiveReactionsCount;
+
+    private String publishedAt;
 }
