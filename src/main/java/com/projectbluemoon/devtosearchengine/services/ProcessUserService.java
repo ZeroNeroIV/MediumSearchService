@@ -1,10 +1,10 @@
-package com.zeroneroiv.mediumsearchengine.services;
+package com.projectbluemoon.devtosearchengine.services;
 
-import com.zeroneroiv.mediumsearchengine.models.ArticleStatus;
-import com.zeroneroiv.mediumsearchengine.repositories.DBArticleRepository;
-import com.zeroneroiv.mediumsearchengine.repositories.ESArticleRepository;
-import com.zeroneroiv.mediumsearchengine.utilities.MediumApiUtility;
-import com.zeroneroiv.mediumsearchengine.utilities.Worker;
+import com.projectbluemoon.devtosearchengine.models.ArticleStatus;
+import com.projectbluemoon.devtosearchengine.repositories.DBArticleRepository;
+import com.projectbluemoon.devtosearchengine.repositories.ESArticleRepository;
+import com.projectbluemoon.devtosearchengine.utilities.DevToApiUtility;
+import com.projectbluemoon.devtosearchengine.utilities.Worker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +17,10 @@ import java.util.concurrent.Executors;
 @RequiredArgsConstructor
 @Service
 public class ProcessUserService {
-    private final MediumApiUtility mediumApiUtility;
+    //    private final MediumApiUtility mediumApiUtility;
     private final DBArticleRepository dbArticleRepository;
     private final ESArticleRepository esArticleRepository;
-
+    private final DevToApiUtility devToApiUtility;
     // just for trying
     private static final int QUEUE_CAPACITY = 5; // Max articles in queue
     private static final ArrayBlockingQueue<Worker> queue = new ArrayBlockingQueue<>(QUEUE_CAPACITY);
@@ -28,13 +28,13 @@ public class ProcessUserService {
     // Create a thread pool with a fixed number of threads
     private final ExecutorService executorService = Executors.newFixedThreadPool(10);
 
-    public void processUser(String userId) {
-        List<String> results = mediumApiUtility.fetchUserTopArticles(userId);
+    public void processUser(String username) {
+        List<String> results = devToApiUtility.getTop20ArticleIdsByUsername(username);
 
         for (String result : results) {
             ArticleStatus articleStatus = new ArticleStatus();
             articleStatus.setArticleId(result);
-            articleStatus.setAuthorId(userId);
+            articleStatus.setUsername(username);
             dbArticleRepository.save(articleStatus);
         }
 
@@ -51,7 +51,7 @@ public class ProcessUserService {
                             queue,
                             dbArticleRepository,
                             esArticleRepository,
-                            mediumApiUtility);
+                            devToApiUtility);
                 });
     }
 }

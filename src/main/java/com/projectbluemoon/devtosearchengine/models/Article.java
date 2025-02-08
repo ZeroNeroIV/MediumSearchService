@@ -1,4 +1,4 @@
-package com.zeroneroiv.mediumsearchengine.models;
+package com.projectbluemoon.devtosearchengine.models;
 
 import lombok.Data;
 import org.springframework.data.elasticsearch.annotations.Document;

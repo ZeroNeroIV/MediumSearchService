@@ -1,7 +1,7 @@
-package com.zeroneroiv.mediumsearchengine.services;
+package com.projectbluemoon.devtosearchengine.services;
 
-import com.zeroneroiv.mediumsearchengine.models.ArticleStatus;
-import com.zeroneroiv.mediumsearchengine.repositories.DBArticleRepository;
+import com.projectbluemoon.devtosearchengine.models.ArticleStatus;
+import com.projectbluemoon.devtosearchengine.repositories.DBArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +12,8 @@ import java.util.List;
 public class StatusService {
     private final DBArticleRepository DBArticleRepository;
 
-    public List<ArticleStatus> getUserArticlesStatus(String userId) {
-        return DBArticleRepository.findAllByAuthorId(userId);
+    public List<ArticleStatus> getUserArticlesStatus(String username) {
+        return DBArticleRepository.findAllByUsername(username);
     }
 //    public List<String> getUserArticlesStatus(String userId) {
 //        List<Article> result = DBArticleRepository.findAllByAuthorId(userId);

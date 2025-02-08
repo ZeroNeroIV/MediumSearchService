@@ -1,28 +1,27 @@
-package com.zeroneroiv.mediumsearchengine.utilities;
+package com.projectbluemoon.devtosearchengine.utilities;
 
-import com.zeroneroiv.mediumsearchengine.models.ArticleStatus;
-import com.zeroneroiv.mediumsearchengine.repositories.DBArticleRepository;
-import com.zeroneroiv.mediumsearchengine.repositories.ESArticleRepository;
+import com.projectbluemoon.devtosearchengine.models.ArticleStatus;
+import com.projectbluemoon.devtosearchengine.repositories.DBArticleRepository;
+import com.projectbluemoon.devtosearchengine.repositories.ESArticleRepository;
 
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 
 public class Worker implements Runnable {
+    DevToApiUtility devToApiUtility;
+    String articleId;
     private DBArticleRepository dbArticleRepository;
     private ESArticleRepository esArticleRepository;
-    MediumApiUtility mediumApiUtility;
-    String articleId;
 
     public void doWorker(
             String id,
             ArrayBlockingQueue<Worker> queue,
             DBArticleRepository dbRepo,
             ESArticleRepository esRepo,
-            MediumApiUtility mediumApiUtil
+            DevToApiUtility devToApiUtility
 
     ) {
         articleId = id;
-        mediumApiUtility = mediumApiUtil;
         dbArticleRepository = dbRepo;
         esArticleRepository = esRepo;
         run(); // Logic
@@ -31,8 +30,8 @@ public class Worker implements Runnable {
 
     @Override
     public void run() {
-        // Fetch from medium
-        Map<String, Object> articleInfo = mediumApiUtility.fetchArticleInfo(articleId);
+        // Fetch from devto
+        Map<String, Object> articleInfo = devToApiUtility.fetchArticleInfo(articleId);
         ArticleStatus articleStatus = dbArticleRepository
                 .findByArticleId(articleId)
                 .orElseThrow(() -> new RuntimeException("Article not found"));

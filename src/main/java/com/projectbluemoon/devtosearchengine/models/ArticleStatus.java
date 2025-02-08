@@ -1,4 +1,4 @@
-package com.zeroneroiv.mediumsearchengine.models;
+package com.projectbluemoon.devtosearchengine.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -10,8 +10,8 @@ public class ArticleStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+    private String username;
     private String articleId;
-    private String authorId;
     private String elasticSearchDocumentId;
     private ProcessingStatus status = ProcessingStatus.PENDING;
 

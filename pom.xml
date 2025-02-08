@@ -8,11 +8,11 @@
         <version>3.4.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.ZeroNeroIV</groupId>
+    <groupId>com.ProjectBlueMoon</groupId>
     <artifactId>DevToSearchEngine</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>MediumSearchEngine</name>
-    <description>MediumSearchEngine</description>
+    <name>DevToSearchEngine</name>
+    <description>DevToSearchEngine</description>
     <url/>
     <licenses>
         <license/>

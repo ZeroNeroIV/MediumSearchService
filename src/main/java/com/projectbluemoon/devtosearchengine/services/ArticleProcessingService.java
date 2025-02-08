@@ -1,8 +1,8 @@
-package com.zeroneroiv.mediumsearchengine.services;
+package com.projectbluemoon.devtosearchengine.services;
 
-import com.zeroneroiv.mediumsearchengine.models.ArticleStatus;
-import com.zeroneroiv.mediumsearchengine.repositories.DBArticleRepository;
-import com.zeroneroiv.mediumsearchengine.repositories.ESArticleRepository;
+import com.projectbluemoon.devtosearchengine.models.ArticleStatus;
+import com.projectbluemoon.devtosearchengine.repositories.DBArticleRepository;
+import com.projectbluemoon.devtosearchengine.repositories.ESArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +17,8 @@ public class ArticleProcessingService {
     private final DBArticleRepository dbArticleRepository;
     private final ESArticleRepository esArticleRepository;
 
-    public List<Map<String, Object>> fetchUserArticles(String userId) {
-        List<ArticleStatus> articleStatuses = dbArticleRepository.findAllByAuthorId(userId);
+    public List<Map<String, Object>> fetchUserArticles(String username) {
+        List<ArticleStatus> articleStatuses = dbArticleRepository.findAllByUsername(username);
         List<Map<String, Object>> result = new ArrayList<>();
         articleStatuses.forEach(article -> {
             try {

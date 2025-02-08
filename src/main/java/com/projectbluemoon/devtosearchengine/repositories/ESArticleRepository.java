@@ -1,11 +1,11 @@
-package com.zeroneroiv.mediumsearchengine.repositories;
+package com.projectbluemoon.devtosearchengine.repositories;
 
+import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.query_dsl.MatchQuery;
 import co.elastic.clients.elasticsearch.core.*;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -18,11 +18,10 @@ import java.util.Map;
 @Repository
 @RequiredArgsConstructor
 public class ESArticleRepository {
-    @Value("${custom.elasticsearch.index-name}")
-    private String indexName;
     private final ElasticsearchClient client;
     private final ObjectMapper objectMapper;
-
+    @Value("${custom.elasticsearch.index-name}")
+    private String indexName;
 
     // Save an article to Elasticsearch.
     public String saveArticle(Map<String, Object> article) {

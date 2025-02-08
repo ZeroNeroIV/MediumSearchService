@@ -1,10 +1,10 @@
-package com.zeroneroiv.mediumsearchengine;
+package com.projectbluemoon.devtosearchengine;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MediumSearchEngineApplicationTests {
+class DevToSearchEngineApplicationTests {
 
     @Test
     void contextLoads() {

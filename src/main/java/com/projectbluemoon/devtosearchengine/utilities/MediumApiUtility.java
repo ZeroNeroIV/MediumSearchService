@@ -1,4 +1,4 @@
-package com.zeroneroiv.mediumsearchengine.utilities;
+package com.projectbluemoon.devtosearchengine.utilities;
 
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.zeroneroiv.mediumsearchengine.controllers;
+package com.projectbluemoon.devtosearchengine.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
