@@ -30,18 +30,23 @@ public class Worker implements Runnable {
 
     @Override
     public void run() {
-        // Fetch from devto
-        Map<String, Object> articleInfo = devToApiUtility.fetchArticleInfo(articleId);
         ArticleStatus articleStatus = dbArticleRepository
                 .findByArticleId(articleId)
                 .orElseThrow(() -> new RuntimeException("Article not found"));
+        articleStatus.setStatus(ArticleStatus.ProcessingStatus.PROCESSING);
+        try {
+            // Fetch from devto
+            Map<String, Object> articleInfo = devToApiUtility.fetchArticleInfo(articleId);
 
-        // Send to ES
-        String esId = esArticleRepository.saveArticle(articleInfo);
-        articleStatus.setElasticSearchDocumentId(esId);
+            // Send to ES
+            String esId = esArticleRepository.saveArticle(articleInfo);
+            articleStatus.setElasticSearchDocumentId(esId);
 
-        // update db-queue
-        articleStatus.setStatus(ArticleStatus.ProcessingStatus.COMPLETED);
-        dbArticleRepository.save(articleStatus);
+            // update db-queue
+            articleStatus.setStatus(ArticleStatus.ProcessingStatus.COMPLETED);
+            dbArticleRepository.save(articleStatus);
+        } catch (Exception e) {
+            articleStatus.setStatus(ArticleStatus.ProcessingStatus.FAILED);
+        }
     }
 }
